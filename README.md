@@ -5,4 +5,11 @@ Shows a simple progress bar on the top of the page tracking the completion of mu
 ### Usage
 
     // 3 = show completion of any three ajax requests
-    $('body').showAjaxProgress(3);
+    $(element).showAjaxProgress(3);
+    
+    // Override progress bar CSS
+    $(element).showAjaxProgress(3, {
+      'position': 'fixed',
+      'top': 'initial',
+      'bottom': '0'
+    });
