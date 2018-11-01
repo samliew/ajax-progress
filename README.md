@@ -1,8 +1,8 @@
-# jQuery.ajaxProgress
+# ajax-progress
 
 Shows a simple progress bar on the top of the page tracking the completion of multiple ajax requests
 
-### Usage
+## Example Usage
 
     // 3 = show completion of any three ajax requests
     $(element).showAjaxProgress(3);
