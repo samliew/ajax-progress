@@ -4,7 +4,7 @@
     jQuery('body').append(`
         <style>
         .ajax-progressbar {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
@@ -23,9 +23,9 @@
         }
         </style>`);
 
-    jQuery.fn.showAjaxProgress = function(num) {
+    jQuery.fn.showAjaxProgress = function(num, styles = {}) {
 
-        const progressbar = jQuery(`<progress class="ajax-progressbar" value="0" max="${num}"></progress>`).appendTo('body');
+        const progressbar = jQuery(`<progress class="ajax-progressbar" value="0" max="${num}"></progress>`).css(styles).prependTo(this);
         let count = 0, max = num;
 
         jQuery(document).ajaxComplete(function() {
