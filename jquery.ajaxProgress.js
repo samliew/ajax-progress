@@ -35,6 +35,10 @@
             progressbar.val(++count);
             if(count == max) progressbar.remove();
         });
+
+        jQuery(document).ajaxStop(function() {
+            progressbar.remove();
+        });
         
         // Maximum time to wait for completion
         setTimeout(function() {
