@@ -1,4 +1,7 @@
 (function(jQuery) {
+    
+    // Plugin options
+    const maxTimeout = 30000;
 
     // Plugin CSS
     jQuery('body').append(`
@@ -32,6 +35,11 @@
             progressbar.val(++count);
             if(count == max) progressbar.remove();
         });
+        
+        // Maximum time to wait for completion
+        setTimeout(function() {
+            progressbar.remove();
+        }, maxTimeout, progressbar);
     }
 
 })(jQuery);
