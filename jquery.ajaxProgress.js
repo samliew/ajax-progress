@@ -1,7 +1,7 @@
 (function(jQuery) {
     
     // Plugin options
-    const maxTimeout = 30000;
+    let maxTimeout = 30000;
 
     // Plugin CSS
     jQuery('body').append(`
@@ -29,15 +29,19 @@
     jQuery.fn.showAjaxProgress = function(num, styles = {}) {
 
         const progressbar = jQuery(`<progress class="ajax-progressbar" value="0" max="${num}"></progress>`).css(styles).prependTo(this);
-        let count = 0, max = num;
+        let count = 0, max = num, activeTimeout = 0;
+        maxTimeout = 1000 * num;
 
         jQuery(document).ajaxComplete(function() {
             progressbar.val(++count);
-            if(count == max) progressbar.remove();
-        });
-
-        jQuery(document).ajaxStop(function() {
-            progressbar.remove();
+            if(count == max) {
+                progressbar.remove();
+                jQuery(document).unbind('ajaxComplete');
+            }
+            
+            // Also remove progressbar only if there are no further ajax completions after X seconds
+            if(activeTimeout) clearTimeout(activeTimeout);
+            activeTimeout = setTimeout(() => { progressbar.remove(); }, 10000);
         });
         
         // Maximum time to wait for completion
