@@ -33,7 +33,7 @@
         maxTimeout = 1000 * num;
 
         jQuery(document).ajaxComplete(function() {
-            progressbar.val(++count);
+            progressbar.val(++count).attr('title', count + '/' + max);
             if(count == max) {
                 progressbar.remove();
                 jQuery(document).unbind('ajaxComplete');
